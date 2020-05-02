@@ -1,5 +1,6 @@
 import React from 'react';
 import { Editor } from '@tinymce/tinymce-react'; 
+
 class Redact extends React.Component {
   handleEditorChange = (e) => {
     console.log(
@@ -11,7 +12,7 @@ class Redact extends React.Component {
   render() {
     return (
       <Editor
-        apiKey= ""
+        apiKey= {process.env.REACT_APP_TINYMCE_API_KEY}
         initialValue="<p>Initial content</p>"
         init={{
           selector: "textarea",
