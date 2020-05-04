@@ -5,7 +5,7 @@ import axios from "axios";
 const Post = props => (
     <div>
         <div>
-        <h2>{props.post.title}</h2>
+        <h4>{props.post.title}</h4>
         <p>{props.post.date.substring(0,10)}</p>
         <p>{props.post.content.substring(0,30) + "..." }</p>
         <p>{props.post.username}</p>
