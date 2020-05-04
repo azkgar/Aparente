@@ -73,10 +73,10 @@ export default class EditPosts extends Component {
         }
         console.log(editedPost);
 
-        axios.post("http://localhost:5000/writescribir/post/editar/"+this.props.match.params.id)
+        axios.post("http://localhost:5000/writescribir/post/editar/"+this.props.match.params.id, editedPost)
             .then(res=>console.log(res.data));
         
-        window.location = "/";
+        //window.location = "/";
     }
 
     render(){
