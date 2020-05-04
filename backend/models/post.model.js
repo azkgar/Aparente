@@ -10,7 +10,7 @@ const postSchema = new Schema ({
     date: {
         type:Date,
         required: true
-    }
+    },
     content: {
         type: String,
         required: true
