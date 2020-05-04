@@ -23,5 +23,11 @@ router.route("/nuevo")
         .catch(err=> res.status(400).json("Error: " + err));
     
 });
+router.route("/eliminar")
+.delete((req,res)=>{
+    Writer.findByIdAndDelete(req.params.id)
+        .then(()=>res.json("Escritor eliminado."))
+        .catch(err=>res.status(400).json("Error: " + err));
+});
 
 module.exports=router;

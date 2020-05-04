@@ -28,7 +28,7 @@ router.route("/redactar")
 router.route("/:id")
 .get((req,res)=>{
     Post.findById(req.params.id)
-        .then(exercise => res.json(post))
+        .then(post => res.json(post))
         .catch(err => res.status(400).json("Error: " + err));
 })
 .delete((req,res)=>{
