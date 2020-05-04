@@ -24,6 +24,11 @@ router.route("/nuevo")
     
 });
 router.route("/eliminar/:id")
+.get((req,res)=>{
+    Writer.findById(req.params.id)
+        .then(writer => res.json(writer))
+        .catch(err => res.status(400).json("Error: "+err));
+})
 .delete((req,res)=>{
     Writer.findByIdAndDelete(req.params.id)
         .then(()=>res.json("Escritor eliminado."))
