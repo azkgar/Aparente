@@ -15,6 +15,19 @@ export default class EditUser extends Component{
         }
     }
 
+    componentDidMount(){
+        axios.get("http://localhost:5000/writescribir/writescritor/eliminar/"+this.props.match.params.id)
+            .then(response => {
+                this.setState({
+                    username: response.data.username,
+                    password: ""
+                });
+            })
+            .catch(function(error){
+                console.log(error);
+            });
+    }
+
     onChangeUsername(e){
         this.setState({
             username: e.target.value
@@ -36,7 +49,7 @@ export default class EditUser extends Component{
 
         console.log(user);
 
-        axios.post("http://localhost:5000/writescribir/writescritor/nuevo", user)
+        axios.post("http://localhost:5000/writescribir/writescritor/actualizar/"+this.props.match.params.id, user)
             .then(res => console.log(res.data));
         
         this.setState({
@@ -47,7 +60,7 @@ export default class EditUser extends Component{
     render(){
         return(
             <div>
-                <h2>Registra un nuevo escritor</h2>
+                <h2>Actualiza escritor</h2>
                 <form onSubmit = {this.onSubmit}>
                     <div className = "form-group">
                         <label>Nombre de usuario: </label>
@@ -68,7 +81,7 @@ export default class EditUser extends Component{
                         />
                     </div>
                     <div className = "form-group">
-                        <input type = "submit" value = "Crear nuevo escritor" className = "btn btn-primary"/>
+                        <input type = "submit" value = "Editar escritor" className = "btn btn-primary"/>
                     </div>
                 </form>
             </div>

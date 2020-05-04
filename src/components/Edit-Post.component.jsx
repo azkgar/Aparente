@@ -129,7 +129,7 @@ export default class EditPosts extends Component {
                             />
                     </div>
                     <div className = "form-group">
-                        <input type = "submit" value = "Publicar nuevo post"
+                        <input type = "submit" value = "Editar post"
                         className = "btn btn-primary" />
                     </div>
                 </form>
