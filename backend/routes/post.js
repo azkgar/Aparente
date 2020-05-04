@@ -10,13 +10,13 @@ router.route("/")
 
 router.route("/redactar")
 .post((req,res)=>{
-    const author = req.body.author;
+    const username = req.body.username;
     const title = req.body.title;
     const date = Date.parse(req.body.date);
     const content = req.body.content;
 
     const newPost = new Post ({
-        author,
+        username,
         title,
         date,
         content
@@ -43,7 +43,7 @@ router.route("/editar/:id")
 .post((req,res)=>{
     Post.findById(req.params.id)
         .then(post => {
-            post.author = req.body.author;
+            post.username = req.body.username;
             post.title = req.body.title;
             post.date = Date.parse(req.body.date);
             post.content = req.body.content;

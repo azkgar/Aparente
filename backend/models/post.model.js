@@ -3,10 +3,9 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const postSchema = new Schema ({
-    author: {
+    username: {
         type: String,
         required: true,
-        unique: true
     },
     title: {
         type: String,

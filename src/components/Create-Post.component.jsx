@@ -7,14 +7,14 @@ export default class CreatePosts extends Component{
     constructor(props){
         super(props);
 
-        this.onChangeAuthor = this.onChangeAuthor.bind(this);
+        this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangeTitle = this.onChangeTitle.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
         this.onChangeContent = this.onChangeContent.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            author: "",
+            username: "",
             title: "",
             date: new Date(),
             content: "",
@@ -34,9 +34,9 @@ export default class CreatePosts extends Component{
             });
     }
 
-    onChangeAuthor(e){
+    onChangeUsername(e){
         this.setState({
-            author: e.target.value
+            username: e.target.value
         });
     }
 
@@ -60,18 +60,18 @@ export default class CreatePosts extends Component{
 
     onSubmit(e){
         e.preventDefault();
-        const post = {
-            author: this.state.author,
+        const newPost = {
+            username: this.state.username,
             title: this.state.title,
             date: this.state.date,
             content: this.state.content
         }
 
-        console.log(post);
+        console.log(newPost);
 
-        axios.post("http://localhost:5000/writescribir/post/redactar/", post)
+        axios.post("http://localhost:5000/writescribir/post/redactar", newPost)
             .then(res=>console.log(res.data));
-        window.location = "/";
+        window.location = "/redactar";
 
     }
 
@@ -82,16 +82,16 @@ export default class CreatePosts extends Component{
                 <form onSubmit = {this.onSubmit}>
                     <div className = "form-group">
                         <label>Autor: </label>
-                        <select ref = "userInput"
+                        <select
                         required
                         className = "form-control"
-                        value = {this.state.author}
-                        onChange={this.onChangeAuthor}>
+                        value = {this.state.username}
+                        onChange={this.onChangeUsername}>
                             {
-                                this.state.authors.map(function(author){
+                                this.state.authors.map(function(writer){
                                 return <option
-                                key = {author}
-                                value = {author} > {author}
+                                key = {writer}
+                                value = {writer} > {writer}
                                 </option>;
                                 })
                             }
