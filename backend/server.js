@@ -20,6 +20,9 @@ connection.once("open",()=>{
 const postRouter = require("./routes/post");
 const writersRouter = require("./routes/writers");
 
+app.use("/writescribir/post", postRouter);
+app.use("/writescribir/writescritor", writersRouter)
+
 app.listen(port,()=>{
     console.log("Servidor corriendo en el 5000");
 });
