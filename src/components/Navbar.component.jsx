@@ -15,7 +15,7 @@ export default class Navbar extends Component {
                         <Link to="/redactar" className="nav-link">Nuevo post</Link>
                     </li>
                     <li className="navbar-item">
-                        <Link to="/user" className="nav-link">Administrador de Usuarios</Link>
+                        <Link to="/nuevousuario" className="nav-link">Administrador de Usuarios</Link>
                     </li>
                 </ul>
                 </div>
