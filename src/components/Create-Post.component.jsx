@@ -7,6 +7,7 @@ export default class CreatePosts extends Component{
     constructor(props){
         super(props);
 
+        this.onChangeAuthor = this.onChangeAuthor.bind(this);
         this.onChangeTitle = this.onChangeTitle.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
         this.onChangeContent = this.onChangeContent.bind(this);
@@ -17,7 +18,7 @@ export default class CreatePosts extends Component{
             title: "",
             date: new Date(),
             content: "",
-            posts: []
+            authors: []
         }
     }
 
@@ -26,7 +27,7 @@ export default class CreatePosts extends Component{
             .then(response => {
                 if(response.data.length>0){
                     this.setState({
-                        authors: response.data.map(author=>author.username),
+                        writers: response.data.map(writer=>writer.username),
                         username: response.data[0].username
                     });
                 }
@@ -45,7 +46,7 @@ export default class CreatePosts extends Component{
         });
     }
 
-    onChangeDate(e){
+    onChangeDate(date){
         this.setState({
             date: date
         });
@@ -81,13 +82,13 @@ export default class CreatePosts extends Component{
                 <form onSubmit = {this.onSubmit}>
                     <div className = "form-group">
                         <label>Autor: </label>
-                        <select ref="userInput"
+                        <select ref = "userInput"
                         required
                         className = "form-control"
                         value = {this.state.author}
                         onChange={this.onChangeAuthor}>
                             {
-                                this.state.author.map(function(author){
+                                this.state.authors.map(function(author){
                                 return <option
                                 key = {author}
                                 value = {author} > {author}
