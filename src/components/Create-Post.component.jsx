@@ -23,15 +23,15 @@ export default class CreatePosts extends Component{
     }
 
     componentDidMount(){
-        axios.get("http://localhost:5000/writescribir/writescritor")
+        axios.get("http://localhost:5000/writescribir/writescritor/")
             .then(response => {
-                if(response.data.length>0){
+                if (response.data.length > 0){
                     this.setState({
-                        writers: response.data.map(writer=>writer.username),
+                        authors: response.data.map(writer=>writer.username),
                         username: response.data[0].username
                     });
                 }
-            })
+            });
     }
 
     onChangeAuthor(e){
@@ -69,7 +69,7 @@ export default class CreatePosts extends Component{
 
         console.log(post);
 
-        axios.post("http://localhost:5000/writescribir/post/redactar", post)
+        axios.post("http://localhost:5000/writescribir/post/redactar/", post)
             .then(res=>console.log(res.data));
         window.location = "/";
 
