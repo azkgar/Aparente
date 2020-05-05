@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import axios from "axios";
+import {Editor} from "@tinymce/tinymce-react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -59,9 +60,10 @@ export default class EditPosts extends Component {
             date: date
         });
     }
-    onChangeContent(e){
+    onChangeContent = (e) => {
+        const content = e.target.getContent()
         this.setState({
-            content: e.target.value
+            content: content
         });
     }
     onSubmit(e){
@@ -120,13 +122,30 @@ export default class EditPosts extends Component {
                                 />
                             </div>
                     </div>
-                    <div className = "form-group">
+                    <div>
                             <label>Contenido: </label>
-                            <input type = "text"
-                            required
-                            className = "form-control"
-                            value = {this.state.content}
-                            onChange = {this.onChangeContent}
+                            <Editor
+                                apiKey= {process.env.REACT_APP_TINYMCE_API_KEY}
+                                initialValue = {this.state.content}
+                                init={{
+                                    selector: "textarea",
+                                    height: 500,
+                                    menubar: "insert",
+                                    plugins: [
+                                        'advlist autolink lists link image', 
+                                        'charmap print preview anchor help',
+                                        'searchreplace visualblocks code',
+                                        'insertdatetime media table paste wordcount'
+                                    ],
+                                    toolbar:
+                                        'undo redo | formatselect | bold italic | \
+                                        alignleft aligncenter alignright | \
+                                        bullist numlist outdent indent | help | image',
+                                    image_description: true,
+                                    image_title: true,
+                                    image_caption: true,
+                                    }}
+                                onChange={this.onChangeContent}
                             />
                     </div>
                     <div className = "form-group">
