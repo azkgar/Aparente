@@ -34,13 +34,8 @@ export default class SigninForm extends Component {
             password: this.state.password
         }
 
-        axios.post("http://localhost:5000/writescribir/writescritor/nuevo", user)
-            .then(res=>console.log(res.data));
+        axios.post("http://localhost:5000/writescribir/login", user)
         
-        this.setState({
-            username:"",
-            password:""
-        });
     }
 
         render(){

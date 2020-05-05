@@ -4,11 +4,14 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
+
 const app = express();
 const port = process.env.PORT||5000;
 
 app.use(cors());
 app.use(express.json());
+
+
 
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri,{useNewUrlParser:true,useCreateIndex:true,useUnifiedTopology:true});
@@ -19,9 +22,11 @@ connection.once("open",()=>{
 
 const postRouter = require("./routes/post");
 const writersRouter = require("./routes/writers");
+const authenticationRouter = require("./routes/authenticate");
 
 app.use("/writescribir/post", postRouter);
-app.use("/writescribir/writescritor", writersRouter)
+app.use("/writescribir/writescritor", writersRouter);
+app.use("/writescribir",authenticationRouter);
 
 app.listen(port,()=>{
     console.log("Servidor corriendo en el 5000");

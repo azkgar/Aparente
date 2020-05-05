@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
-import ReactHtmlParser, {processNodes, convertNodeToElement, htmlparser2} from "react-html-parser";
+import ReactHtmlParser from "react-html-parser";
 
 const Post = props => (
 
