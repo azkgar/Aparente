@@ -6,6 +6,7 @@ import CreatePosts from "./components/Create-Post.component";
 import CreateUser from "./components/Create-User.component";
 import PostsList from "./components/Posts-List.component";
 import EditPosts from "./components/Edit-Post.component";
+import SigninForm from "./components/Signin-Form.component";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <Route path="/redactar" component={CreatePosts} />
       <Route path = "/nuevousuario" component = {CreateUser} />
       <Route path = "/editarpost/:id" component = {EditPosts} />
+      <Route path = "/entrar" component = {SigninForm}/>
       </div>
       
     </Router> 
