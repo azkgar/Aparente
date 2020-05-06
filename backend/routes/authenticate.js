@@ -3,10 +3,6 @@ require("dotenv").config();
 const router = require("express").Router();
 const session = require("express-session");
 const passport = require("passport");
-let Writer = require("../models/writers.model");
-
-
-
 
 router.use(session({
     secret: process.env.SECRET,
@@ -17,16 +13,11 @@ router.use(session({
 router.use(passport.initialize());
 router.use(passport.session());
 
-passport.use(Writer.createStrategy());
-passport.serializeUser(function(user,done){
-    done(null, user.id);
-});
+const Writer = require ("../models/writers.model");
 
-passport.deserializeUser(function(id,done){
-    Writer.findById(id, function(err, user){
-        done(err,user);
-    });
-});
+passport.use(Writer.createStrategy());
+passport.serializeUser(Writer.serializeUser());
+passport.deserializeUser(Writer.deserializeUser());
 
 router.route("/")
 .get((req,res)=>{
@@ -49,7 +40,7 @@ router.route("/login")
             console.log(err);
         } else {
             passport.authenticate("local")(req,res,function(){
-                res.redirect("http://localhost:3000/");
+                res.redirect("/admin");
             });
         }
     });
@@ -63,13 +54,28 @@ router.route("/register")
     Writer.register({username: req.body.username}, req.body.password, function(err,user){
         if (err){
             console.log(err);
-            res.redirect("/http://localhost:3000/nuevousuario"); //Cambiar a localhost:3000/entrar
+            res.redirect("http://localhost:3000/nuevousuario");
         } else {
             passport.authenticate("local")(req, res, function(){
-                res.redirect("localhost:3000/");
+                res.redirect("http://localhost:3000/");
             });
         }
     });
+});
+
+router.route("/admin")
+.get(function(req,res){
+    if (req.isAuthenticated()){
+        res.redirect("http://localhost:3000/");
+    } else {
+       res.redirect("/login"); 
+    }
+});
+
+router.route("/logout")
+.get(function(req,res){
+    req.logout();
+    res.redirect("/login");
 });
 
 module.exports = router;

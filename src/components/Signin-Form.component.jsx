@@ -34,7 +34,7 @@ export default class SigninForm extends Component {
             password: this.state.password
         }
 
-        axios.post("http://localhost:5000/writescribir/login", user)
+        axios.post("http://localhost:5000/login",user);
         
     }
 

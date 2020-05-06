@@ -26,7 +26,7 @@ const authenticationRouter = require("./routes/authenticate");
 
 app.use("/writescribir/post", postRouter);
 app.use("/writescribir/writescritor", writersRouter);
-app.use("/writescribir",authenticationRouter);
+app.use("/",authenticationRouter);
 
 app.listen(port,()=>{
     console.log("Servidor corriendo en el 5000");
