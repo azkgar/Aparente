@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import axios from "axios";
+import qs from "qs";
 
 export default class SigninForm extends Component {
     constructor(props){
@@ -34,8 +35,9 @@ export default class SigninForm extends Component {
             password: this.state.password
         }
 
-        axios.post("http://localhost:5000/login",user);
-        
+        axios.post("http://localhost:5000/login", qs.stringify(user))
+        .then(res => console.log(res.data));
+
     }
 
         render(){
@@ -61,6 +63,15 @@ export default class SigninForm extends Component {
                         </div>
                         <div className = "form-group">
                             <input type = "submit" value = "Entra al mundo" className = "btn btn-primary"/>
+                        </div>
+                        <div className = "col-sm-4">
+                            <div className = "card">
+                                <div className = "card-body">
+                                    <a className = "btn btn-block btn social btn google" href="http://localhost:5000/auth/google" role="button">
+                                        Sign In with Google
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>

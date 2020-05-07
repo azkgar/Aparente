@@ -3,6 +3,7 @@ import axios from "axios";
 import {Editor} from "@tinymce/tinymce-react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import qs from "qs";
 
 export default class CreatePosts extends Component{
     constructor(props){
@@ -71,7 +72,7 @@ export default class CreatePosts extends Component{
 
         console.log(newPost);
 
-        axios.post("http://localhost:5000/writescribir/post/redactar", newPost)
+        axios.post("http://localhost:5000/writescribir/post/redactar", qs.stringify(newPost))
             .then(res=>console.log(res.data));
         window.location = "/redactar";
 

@@ -1,23 +1,32 @@
-require("dotenv").config();
-
 const router = require("express").Router();
-const session = require("express-session");
 const passport = require("passport");
-
-router.use(session({
-    secret: process.env.SECRET,
-    resave: false,
-    saveUninitialized: false
-}));
-
-router.use(passport.initialize());
-router.use(passport.session());
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
 const Writer = require ("../models/writers.model");
 
 passport.use(Writer.createStrategy());
-passport.serializeUser(Writer.serializeUser());
-passport.deserializeUser(Writer.deserializeUser());
+passport.serializeUser(function(user, done){
+    done(null, user.id);
+});
+passport.deserializeUser(function(id,done){
+    Writer.findById(id, function(err, user){
+        done(err,user);
+    });
+});
+
+passport.use(new GoogleStrategy({
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    callbackURL: "http://localhost:5000/auth/google/secrets",
+    userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
+
+},
+function(accessToken, refreshToken, profile,cb){
+    console.log(profile);
+    Writer.findOrCreate({googleId: profile.id}, function(err,user){
+        return cb(err,user);
+    });
+}));
 
 router.route("/")
 .get((req,res)=>{
@@ -57,7 +66,7 @@ router.route("/register")
             res.redirect("http://localhost:3000/nuevousuario");
         } else {
             passport.authenticate("local")(req, res, function(){
-                res.redirect("http://localhost:3000/");
+                res.redirect("http://localhost:5000/admin");
             });
         }
     });
@@ -66,7 +75,7 @@ router.route("/register")
 router.route("/admin")
 .get(function(req,res){
     if (req.isAuthenticated()){
-        res.redirect("http://localhost:3000/");
+        res.redirect("http://localhost:3000");
     } else {
        res.redirect("/login"); 
     }
@@ -77,5 +86,16 @@ router.route("/logout")
     req.logout();
     res.redirect("/login");
 });
+
+router.route("/auth/google")
+.get(passport.authenticate("google", {scope:["profile"]}));
+
+router.route("/auth/google/secrets")
+.get(
+    passport.authenticate("google", {failureRedirect: "/login"}),
+    function(req,res){
+        res.redirect("http://localhost:3000/")
+    }
+);
 
 module.exports = router;
