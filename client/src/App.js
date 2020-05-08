@@ -7,6 +7,8 @@ import CreateUser from "./components/Create-User.component";
 import PostsList from "./components/Posts-List.component";
 import EditPosts from "./components/Edit-Post.component";
 import SigninForm from "./components/Signin-Form.component";
+import Home from "./components/Home.component";
+import Fail from "./components/Fail.component";
 
 
 function App() {
@@ -15,11 +17,13 @@ function App() {
       <div className = "container">
       <Navbar /> 
       <br /> 
-      <Route path="/" exact component = {PostsList}/>
-      <Route path="/redactar" component={CreatePosts} />
-      <Route path = "/nuevousuario" component = {CreateUser} />
-      <Route path = "/editarpost/:id" component = {EditPosts} />
-      <Route path = "/entrar" component = {SigninForm}/>
+      <Route exact path = "/" component = {Home} />
+      <Route exact path="/admin/consola" component = {PostsList}/>
+      <Route exact path="/admin/crea" component={CreatePosts} />
+      <Route exact path = "/admin/usuarios" component = {CreateUser} />
+      <Route exact path = "/admin/edita/:id" component = {EditPosts} />
+      <Route exact path = "/admin" component = {SigninForm}/>
+      <Route path = "*" component = {Fail} />
       </div>
       
     </Router> 

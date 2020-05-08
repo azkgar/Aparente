@@ -5,17 +5,17 @@ export default class Navbar extends Component {
     render(){ 
         return( 
             <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
-                <Link to="/" className ="navbar-brand">Consola de creación</Link>
+                <Link to="/admin/consola" className ="navbar-brand">Consola de creación</Link>
                 <div className="collapse navbar-collapse">
                 <ul className="navbar-nav mr-auto">
                     <li className="navbar-item">
-                        <Link to="/" className="nav-link">Posts</Link>
+                        <Link to="/admin/consola" className="nav-link">Posts</Link>
                     </li>
                     <li className="navbar-item">
-                        <Link to="/redactar" className="nav-link">Nuevo post</Link>
+                        <Link to="/admin/crea" className="nav-link">Nuevo post</Link>
                     </li>
                     <li className="navbar-item">
-                        <Link to="/nuevousuario" className="nav-link">Administrador de Usuarios</Link>
+                        <Link to="/admin/usuarios" className="nav-link">Administrador de Usuarios</Link>
                     </li>
                 </ul>
                 </div>

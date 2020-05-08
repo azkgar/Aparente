@@ -14,7 +14,7 @@ const Post = props => (
         <p>{props.post.username}</p>
     </div>
     <div>
-        <Link to = {"/editarpost/"+props.post._id}>
+        <Link to = {"/admin/edita/"+props.post._id}>
             <input type= "button" value= "Editar post" />
         </Link>
     </div>
