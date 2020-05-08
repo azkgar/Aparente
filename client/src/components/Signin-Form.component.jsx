@@ -35,8 +35,22 @@ export default class SigninForm extends Component {
             password: this.state.password
         }
 
-        axios.post("http://localhost:5000/login", qs.stringify(user))
-        .then(res => console.log(res.data));
+        fetch("http://localhost:5000/login/",{
+            method: "POST",
+            //credentials: "include",
+            body: qs.stringify(user),
+            headers:{
+                //"Access-Control-Allow-Credentials": true,
+                "Access-Control-Allow-Origin": "http://localhost:3000/"
+            }
+        });
+
+        //axios.post("http://localhost:5000/login", qs.stringify(user),{
+            //headers: {
+                //credentials: "include",
+                //"Access-Control-Allow-Credentials": true
+            //}
+        //});
 
     }
 

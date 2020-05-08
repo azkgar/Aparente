@@ -7,13 +7,15 @@ const Schema = mongoose.Schema;
 const writerSchema = new Schema({
     username: {
         type: String,
-        unique: true,
         trim: true,
         minlenght: 3
     },
     password: {
         type: String,
         minlenght: 6
+    },
+    googleId: {
+        type: String
     }
 },{
     timestamps: true

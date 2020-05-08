@@ -32,10 +32,9 @@ export default class CreateUser extends Component{
         e.preventDefault();
         const user = {
             username: this.state.username,
-            password: this.state.password
+            password: this.state.password,
         }
 
-        console.log(user);
 
         axios.post("http://localhost:5000/register", qs.stringify(user)) //antes writescritor/nuevo
             .then(res => console.log(res.data));
@@ -44,7 +43,7 @@ export default class CreateUser extends Component{
             username: "",
             password: ""
         });
-        window.location = "/";
+        //window.location = "/";
     }
     render(){
         return(

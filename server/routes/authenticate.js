@@ -1,13 +1,20 @@
+const express = require("express");
+const cors = require("cors");
 const router = require("express").Router();
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
-const Writer = require ("../models/writers.model");
+router.use(cors());
+
+let Writer = require ("../models/writers.model");
+
 
 passport.use(Writer.createStrategy());
+
 passport.serializeUser(function(user, done){
     done(null, user.id);
 });
+
 passport.deserializeUser(function(id,done){
     Writer.findById(id, function(err, user){
         done(err,user);
@@ -37,7 +44,7 @@ router.route("/")
 
 router.route("/login")
 .get(function(req,res){
-    res.redirect("http://localhost:3000/entrar");
+    res.redirect("http://localhost:3000/entrar/");
 })
 .post(function(req,res){
     const user = new Writer({
@@ -46,9 +53,11 @@ router.route("/login")
     });
     req.login(user,function(err){
         if(err){
+            console.log("No se pudo entrar!");
             console.log(err);
         } else {
             passport.authenticate("local")(req,res,function(){
+                console.log("Si está autenticando!");
                 res.redirect("/admin");
             });
         }
@@ -57,16 +66,17 @@ router.route("/login")
 
 router.route("/register")
 .get(function(req,res){
-    res.redirect("http://localhost:3000/nuevousuario");
+    res.redirect("http://localhost:3000/nuevousuario/");
 })
 .post(function(req,res){
     Writer.register({username: req.body.username}, req.body.password, function(err,user){
         if (err){
             console.log(err);
-            res.redirect("http://localhost:3000/nuevousuario");
+            res.redirect("http://localhost:3000/nuevousuario/");
         } else {
             passport.authenticate("local")(req, res, function(){
-                res.redirect("http://localhost:5000/admin");
+                console.log("usuario autenticado!")
+                res.redirect("nttp://localhost:3000/");
             });
         }
     });
@@ -75,7 +85,7 @@ router.route("/register")
 router.route("/admin")
 .get(function(req,res){
     if (req.isAuthenticated()){
-        res.redirect("http://localhost:3000");
+        res.redirect("http://localhost:3000/");
     } else {
        res.redirect("/login"); 
     }

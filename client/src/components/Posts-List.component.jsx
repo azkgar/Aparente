@@ -60,6 +60,15 @@ export default class PostsList extends Component {
         return(
             <div>
                 <h2>Posts publicados</h2>
+                <div className = "col-sm-4">
+                            <div className = "card">
+                                <div className = "card-body">
+                                    <a className = "btn btn-block btn social btn google" href="http://localhost:5000/logout" role="button">
+                                       Log out
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                 {this.postsList()}
             </div>
         );
