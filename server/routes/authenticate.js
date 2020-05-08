@@ -39,7 +39,7 @@ function(accessToken, refreshToken, profile,cb){
 
 router.route("/login")
 .get((req,res)=>{
-    res.redirect("http://localhost:3000/admin/login");
+    res.redirect("http://localhost:3000/admin");
 })
 .post((req,res)=>{
     const user = new Writer({
@@ -82,7 +82,7 @@ router.route("/login/failed")
 router.route("/logout")
 .get((req,res)=>{
     req.logout();
-    res.redirect("http://localhost:3000/admin/login");
+    res.redirect("http://localhost:3000/admin");
 });
 
 router.route("/auth/google")
