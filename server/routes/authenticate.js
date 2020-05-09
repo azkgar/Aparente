@@ -84,18 +84,22 @@ router.route("/register")
 .get(function(req,res){
     res.redirect("http://localhost:3000/admin/usuarios");
 })
-.post(function(req,res){
+.post(function(req,res,next){
     Writer.register({username: req.body.username}, req.body.password, function(err,user){
-        if (err){
+        if(err){
             console.log(err);
             res.redirect("http://localhost:3000/admin/usuarios");
         } else {
-            passport.authenticate("local")(req, res, function(){
-                console.log("usuario autenticado!")
-                res.redirect("nttp://localhost:3000/admin/consola");
-            });
+            passport.authenticate("local",function(error,user,info){
+                if(error){
+                    return res.status(500).json({
+                        message: error || "Oops... something went wrong!"
+                    });
+                }
+                return res.json(user);
+            })(req,res,next);
         }
     });
-});
+}); 
 
 module.exports = router;

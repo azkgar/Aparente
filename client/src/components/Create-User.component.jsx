@@ -35,24 +35,23 @@ export default class CreateUser extends Component{
             password: this.state.password,
         }
 
-
-        axios.post("http://localhost:5000/auth/register", user) //antes writescritor/nuevo
-        .then(response => {
-            this.setState ({
+        axios({
+            url: "/auth/register",
+            method: "POST",
+            data: user
+        })
+        .then((response)=>{
+            this.props.history.push("/admin/consola");
+            this.setState({
                 username: "",
                 password: ""
             });
         })
-        .catch(function(error){
-            console.log(error);
+        .catch((error)=>{
+            console.log("Error: ",error.response);
         });
-
-        this.setState({
-            username: "",
-            password: ""
-        });
-        //window.location = "/";
     }
+    
     render(){
         return(
             <div>
