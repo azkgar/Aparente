@@ -36,8 +36,16 @@ export default class CreateUser extends Component{
         }
 
 
-        axios.post("http://localhost:5000/register", user) //antes writescritor/nuevo
-            .then(res => console.log(res.data));
+        axios.post("http://localhost:5000/auth/register", user) //antes writescritor/nuevo
+        .then(response => {
+            this.setState ({
+                username: "",
+                password: ""
+            });
+        })
+        .catch(function(error){
+            console.log(error);
+        });
 
         this.setState({
             username: "",

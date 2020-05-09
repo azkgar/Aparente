@@ -6,4 +6,4 @@ export default class Home extends Component {
             <div>Página Home Aparente</div>
         );
      }
-    }
+}

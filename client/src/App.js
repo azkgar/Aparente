@@ -1,6 +1,5 @@
 import React from 'react';
 import {BrowserRouter as Router, Route} from "react-router-dom";
-
 import Navbar from "./components/Navbar.component";
 import CreatePosts from "./components/Create-Post.component";
 import CreateUser from "./components/Create-User.component";
@@ -25,7 +24,6 @@ function App() {
       <Route exact path = "/admin" component = {SigninForm}/>
       <Route path = "*" component = {Fail} />
       </div>
-      
     </Router> 
   );
 }

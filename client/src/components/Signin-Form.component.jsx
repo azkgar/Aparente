@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import axios from "axios";
-import qs from "qs";
 
 export default class SigninForm extends Component {
     constructor(props){
@@ -34,19 +33,17 @@ export default class SigninForm extends Component {
             username: this.state.username,
             password: this.state.password
         }
-
-        //fetch("http://localhost:5000/login/",{
-            //method: "POST",
-            //credentials: "include",
-            //body: qs.stringify(user),
-            //headers:{
-                //"Access-Control-Allow-Credentials": true,
-                //"Access-Control-Allow-Origin": "http://localhost:3000/"
-           // }
-        //});
-
-        axios.post("http://localhost:5000/login", user);
-
+        axios({
+            url: "/auth/login",
+            method: "POST",
+            data: user
+        })
+        .then((response)=>{
+            this.props.history.push("/admin/consola");
+        })
+        .catch((error)=>{
+            console.log("Error: ",error.response);
+        });
     }
 
         render(){

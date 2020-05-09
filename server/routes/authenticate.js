@@ -3,7 +3,7 @@ const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
 
-let Writer = require ("../models/writers.model");
+const Writer = require ("../models/writers.model");
 
 
 passport.use(Writer.createStrategy());
@@ -41,42 +41,26 @@ router.route("/login")
 .get((req,res)=>{
     res.redirect("http://localhost:3000/admin");
 })
-.post((req,res)=>{
-    const user = new Writer({
-        username : req.body.username,
-        password: req.body.password
-    });
-    req.login(user,err=>{
-        if(err){
-            console.log("No se pudo entrar!");
-            console.log(err);
-            res.redirect("/login");
-        } else {
-            passport.authenticate("local")(req,res,()=>{
-                res.redirect("http://localhost:3000/admin/consola");
-            });
-        }
-    });
-});
-
-router.route("/login/success")
-.get((req,res)=>{
-    if(req.user){
-        res.json({
-            success: true,
-            message: "user has successfully authenticated.",
-            user: req.user,
-            cookies: req.cookies
-        });
-    }
-});
-
-router.route("/login/failed")
-.get((req,res)=>{
-    res.status(401).json({
-        success: false,
-        message: "user failed to authenticate."
-    });
+.post((req,res,next)=>{
+   const user = new Writer({
+       username : req.body.username,
+       password: req.body.password
+   });
+   req.login(user, (err)=>{
+       if (err){
+           console.log(err);
+           res.redirect("/auth/login");
+       } else {
+           passport.authenticate("local", function(error,user,info){
+               if(error){
+                   return res.status(500).json({
+                       message: error || "Oops, something happened!"
+                   });
+               }
+               return res.json(user);
+           })(req,res,next);
+       }
+   });
 });
 
 router.route("/logout")
@@ -85,10 +69,10 @@ router.route("/logout")
     res.redirect("http://localhost:3000/admin");
 });
 
-router.route("/auth/google")
+router.route("/google")
 .get(passport.authenticate("google", {scope:["profile"]}));
 
-router.route("/auth/google/secrets")
+router.route("/google/secrets")
 .get(
     passport.authenticate("google", {failureRedirect: "/login"}),
     function(req,res){
