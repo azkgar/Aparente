@@ -41,43 +41,23 @@ router.route("/login")
 .get((req,res)=>{
     res.redirect("http://localhost:3000/admin");
 })
-//.post((req,res)=>{
-//   const user = new Writer({
-//       username : req.body.username,
-//       password: req.body.password
-//   });
-//   req.login(user, (err)=>{
-//       if (err){
-//           console.log(err);
-//           res.redirect("/auth/login");
-//       } else {
-//            passport.authenticate("local")(req,res,function(){
-//                console.log(user);
-//            }); 
-//       }
-//   });
-//});
-.post((req,res,next) => {
-    const user = new Writer({
-        username : req.body.username,
-        password: req.body.password
-    });
-    passport.authenticate("local", function(error,user,info){
-        if (error){
-            return res.status(500).json({
-                message: error||"Oops, something happened!"
-            });
-        } else {
-            req.login(user,(err)=>{
-                if (err){
-                    console.log("No entras mi chavo");
-                } else {
-                    return res.json(user);
-                }
-            });
-        }
-    })(req,res,next);
+.post((req,res)=>{
+   const user = new Writer({
+       username : req.body.username,
+       password: req.body.password
+   });
+   req.login(user, (err)=>{
+       if (err){
+           console.log(err);
+           return res.json(err.data);
+       } else {
+            passport.authenticate("local")(req,res,function(){
+                return res.json(user);
+            }); 
+       }
+   });
 });
+
 
 router.route("/logout")
 .get((req,res)=>{
