@@ -57,7 +57,6 @@ router.route("/login")
                 });
                 
             });
-            console.log(user);
        }
    });
 });

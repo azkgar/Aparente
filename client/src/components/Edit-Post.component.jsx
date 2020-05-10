@@ -78,7 +78,6 @@ export default class EditPosts extends Component {
         console.log(editedPost);
 
         axios.post("http://localhost:5000/writescribir/post/editar/"+this.props.match.params.id, editedPost)
-            .then(res=>console.log(res.data));
         
         window.location = "/admin/consola";
     }
@@ -136,24 +135,25 @@ export default class EditPosts extends Component {
                             <label>Contenido: </label>
                             <Editor
                                 apiKey= {process.env.REACT_APP_TINYMCE_API_KEY}
-                                initialValue = {this.state.content}
+                                initialValue={this.state.content}
                                 init={{
                                     selector: "textarea",
                                     height: 500,
-                                    menubar: "insert",
+                                    menubar: "insert view tools",
                                     plugins: [
-                                        'advlist autolink lists link image', 
+                                        'advlist autolink lists link image imagetools', 
                                         'charmap print preview anchor help',
                                         'searchreplace visualblocks code',
-                                        'insertdatetime media table paste wordcount'
+                                        'insertdatetime media table paste wordcount',
+                                        "textcolor fullscreen preview emoticons"
                                     ],
                                     toolbar:
-                                        'undo redo | formatselect | bold italic | \
-                                        alignleft aligncenter alignright | \
-                                        bullist numlist outdent indent | help | image',
+                                        'undo redo | formatselect | bold italic underline strikethrough blockquote subscript superscript code | alignleft aligncenter alignright | bullist numlist outdent indent | help | image editimage imageoptions| forecolor backcolor | fullscreen| preview | emoticons |',
                                     image_description: true,
                                     image_title: true,
                                     image_caption: true,
+                                    textcolor_rows: "4",
+                                    /*textcolor_map:["000000","Black"],*/
                                     }}
                                 onChange={this.onChangeContent}
                             />

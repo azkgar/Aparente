@@ -49,10 +49,7 @@ export default class EditUser extends Component{
             password: this.state.password
         }
 
-        console.log(user);
-
         axios.post("http://localhost:5000/writescribir/writescritor/actualizar/"+this.props.match.params.id, user)
-            .then(res => console.log(res.data));
         
         this.setState({
             username: "",

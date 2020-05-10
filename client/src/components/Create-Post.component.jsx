@@ -70,14 +70,10 @@ export default class CreatePosts extends Component{
             content: this.state.content
         }
 
-        console.log(newPost);
-
         axios.post("http://localhost:5000/writescribir/post/redactar", newPost)
-            .then(res=>console.log(res.data));
-        window.location = "/admin/consola";
-
+            .then(window.location = "/admin/consola")
+            .catch(error=>console.log(error));
     }
-
     render(){
         const authenticated = window.localStorage.getItem("isAuthenticated");
 
@@ -136,20 +132,21 @@ export default class CreatePosts extends Component{
                                 init={{
                                     selector: "textarea",
                                     height: 500,
-                                    menubar: "insert",
+                                    menubar: "insert view tools",
                                     plugins: [
-                                        'advlist autolink lists link image', 
+                                        'advlist autolink lists link image imagetools', 
                                         'charmap print preview anchor help',
                                         'searchreplace visualblocks code',
-                                        'insertdatetime media table paste wordcount'
+                                        'insertdatetime media table paste wordcount',
+                                        "textcolor fullscreen preview emoticons"
                                     ],
                                     toolbar:
-                                        'undo redo | formatselect | bold italic | \
-                                        alignleft aligncenter alignright | \
-                                        bullist numlist outdent indent | help | image',
+                                        'undo redo | formatselect | bold italic underline strikethrough blockquote subscript superscript code| alignleft aligncenter alignright | bullist numlist outdent indent | help | image editimage imageoptions | forecolor backcolor | fullscreen| preview | emoticons |',
                                     image_description: true,
                                     image_title: true,
                                     image_caption: true,
+                                    textcolor_rows: "4",
+                                    /*textcolor_map:["000000","Black"],*/
                                     }}
                                 onChange={this.onChangeContent}
                             />
