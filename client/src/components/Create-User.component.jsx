@@ -1,6 +1,5 @@
 import React , {Component} from "react";
 import axios from "axios";
-//import qs from "qs";
 
 export default class CreateUser extends Component{
     constructor(props){
@@ -51,7 +50,7 @@ export default class CreateUser extends Component{
             console.log("Error: ",error.response);
         });
     }
-    
+
     render(){
         return(
             <div>

@@ -19,6 +19,12 @@ app.use(express.json());
 app.use(logger("dev"));
 //app.use(bodyParser.urlencoded({extended:true}));
 
+//app.use(session({
+//    secret: process.env.SECRET,
+//    resave: false,
+//    saveUninitialized: false
+//  }));
+
 app.use(cookieSession({
     name: "session",
     keys: [process.env.SECRET],

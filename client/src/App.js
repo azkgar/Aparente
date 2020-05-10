@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Route} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Navbar from "./components/Navbar.component";
 import CreatePosts from "./components/Create-Post.component";
 import CreateUser from "./components/Create-User.component";
@@ -16,6 +16,7 @@ function App() {
       <div className = "container">
       <Navbar /> 
       <br /> 
+      <Switch>
       <Route exact path = "/" component = {Home} />
       <Route exact path="/admin/consola" component = {PostsList}/>
       <Route exact path="/admin/crea" component={CreatePosts} />
@@ -23,6 +24,7 @@ function App() {
       <Route exact path = "/admin/edita/:id" component = {EditPosts} />
       <Route exact path = "/admin" component = {SigninForm}/>
       <Route path = "*" component = {Fail} />
+      </Switch>
       </div>
     </Router> 
   );
