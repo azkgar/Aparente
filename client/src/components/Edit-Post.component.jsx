@@ -80,7 +80,7 @@ export default class EditPosts extends Component {
         axios.post("http://localhost:5000/writescribir/post/editar/"+this.props.match.params.id, editedPost)
             .then(res=>console.log(res.data));
         
-        window.location = "/";
+        window.location = "/admin/consola";
     }
 
     render(){

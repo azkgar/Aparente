@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const passportLocalMongoose = require("passport-local-mongoose");
-const findOrCreate = require("mongoose-findorcreate");
+//const findOrCreate = require("mongoose-findorcreate");
 
 const Schema = mongoose.Schema;
 
@@ -22,7 +22,7 @@ const writerSchema = new Schema({
 });
 
 writerSchema.plugin(passportLocalMongoose);
-writerSchema.plugin(findOrCreate);
+//writerSchema.plugin(findOrCreate);
 
 const Writer = mongoose.model("Writer", writerSchema);
 

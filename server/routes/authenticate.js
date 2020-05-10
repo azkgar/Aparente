@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const passport = require("passport");
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
+//const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
 
 const Writer = require ("../models/writers.model");
@@ -22,25 +22,24 @@ passport.deserializeUser((id,done)=>{
         });
     });
 
-passport.use(new GoogleStrategy({
-    clientID: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://localhost:5000/auth/google/secrets",
-    userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
-
-},
-function(accessToken, refreshToken, profile,cb){
-    console.log(profile);
-    Writer.findOrCreate({googleId: profile.id}, (err,user)=>{
-        return cb(err,user);
-    });
-}));
+//passport.use(new GoogleStrategy({
+//    clientID: process.env.CLIENT_ID,
+//    clientSecret: process.env.CLIENT_SECRET,
+//    callbackURL: "http://localhost:5000/auth/google/secrets",
+//    userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
+//},
+//function(accessToken, refreshToken, profile,cb){
+//    console.log(profile);
+//    Writer.findOrCreate({googleId: profile.id}, (err,user)=>{
+//        return cb(err,user);
+//    });
+//}));
 
 
 router.route("/login")
-.get((req,res)=>{
-    res.redirect("http://localhost:3000/admin");
-})
+//.get((req,res)=>{
+//    res.redirect("http://localhost:3000/admin");
+//})
 .post((req,res)=>{
    const user = new Writer({
        username : req.body.username,
@@ -69,21 +68,22 @@ router.route("/logout")
     res.redirect("http://localhost:3000/admin");
 });
 
-router.route("/google")
-.get(passport.authenticate("google", {scope:["profile"]}));
+//router.route("/google")
+//.get(passport.authenticate("google", {scope:["profile"]}));
 
-router.route("/google/secrets")
-.get(
-    passport.authenticate("google", {failureRedirect: "/login"}),
-    function(req,res){
-        res.redirect("http://localhost:3000/admin/consola")
-    }
-);
+//router.route("/google/secrets")
+//.get(
+//    passport.authenticate("google", {failureRedirect: "/login"}),
+//    function(req,res){
+//        res.redirect("http://localhost:3000/admin/consola")
+//        return res.json({isAuthenticated: true});
+//    }
+//);
 
 router.route("/register")
-.get(function(req,res){
-    res.redirect("http://localhost:3000/admin/usuarios");
-})
+//.get(function(req,res){
+//    res.redirect("http://localhost:3000/admin/usuarios");
+//})
 .post(function(req,res,next){
     Writer.register({username: req.body.username}, req.body.password, function(err,user){
         if(err){

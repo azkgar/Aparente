@@ -52,8 +52,16 @@ export default class CreateUser extends Component{
     }
 
     render(){
+        const authenticated = window.localStorage.getItem("isAuthenticated");
         return(
             <div>
+                {!authenticated ? (
+                    <div>
+                    <h1>¡Alerta de intruso!</h1>
+                    <p>Enviando dirección IP y captura de cámara</p>
+                    </div>
+                ) : (
+                    <div>
                 <h2>Registra un nuevo escritor</h2>
                 <form onSubmit = {this.onSubmit}>
                     <div className = "form-group">
@@ -79,6 +87,9 @@ export default class CreateUser extends Component{
                     </div>
                 </form>
             </div>
+                )}
+            </div>
+            
         );
     }
 }

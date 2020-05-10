@@ -74,13 +74,22 @@ export default class CreatePosts extends Component{
 
         axios.post("http://localhost:5000/writescribir/post/redactar", newPost)
             .then(res=>console.log(res.data));
-        window.location = "/redactar";
+        window.location = "/admin/consola";
 
     }
 
     render(){
+        const authenticated = window.localStorage.getItem("isAuthenticated");
+
         return(
             <div>
+                {!authenticated ? (
+                    <div>
+                    <h1>¡Alerta de intruso!</h1>
+                    <p>Enviando dirección IP y captura de cámara</p>
+                    </div>
+                ) : (
+                    <div>
                 <h2>Escribe el nuevo post</h2>
                 <form onSubmit = {this.onSubmit}>
                     <div className = "form-group">
@@ -150,6 +159,9 @@ export default class CreatePosts extends Component{
                     </div>
                 </form>
             </div>
+                )}
+            </div>
+            
         );
     }
 }
