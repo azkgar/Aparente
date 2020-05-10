@@ -1,5 +1,6 @@
 import React , {Component} from "react";
 import axios from "axios";
+import Navbar from "./Navbar.component";
 
 export default class CreateUser extends Component{
     constructor(props){
@@ -62,6 +63,7 @@ export default class CreateUser extends Component{
                     </div>
                 ) : (
                     <div>
+                    <Navbar />
                 <h2>Registra un nuevo escritor</h2>
                 <form onSubmit = {this.onSubmit}>
                     <div className = "form-group">

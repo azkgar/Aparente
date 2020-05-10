@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
 import ReactHtmlParser from "react-html-parser";
+import Navbar from "./Navbar.component";
 
 const Post = props => (
 
@@ -77,16 +78,8 @@ export default class PostsList extends Component {
                     </div>
                 ) : (
                 <div>
+                <Navbar />
                 <h1>Bienvenido a la consola de admin.</h1>
-                <div className = "col-sm-4">
-                            <div className = "card">
-                                <div className = "card-body">
-                                    <a className = "btn btn-block btn social btn google" onClick = {this.handleClick} href="http://localhost:5000/auth/logout" role="button">
-                                       Log out
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
                 {this.postsList()}
                 </div>
                 )}

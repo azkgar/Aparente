@@ -3,7 +3,7 @@ import axios from "axios";
 import {Editor} from "@tinymce/tinymce-react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-//import qs from "qs";
+import Navbar from "./Navbar.component";
 
 export default class CreatePosts extends Component{
     constructor(props){
@@ -90,6 +90,7 @@ export default class CreatePosts extends Component{
                     </div>
                 ) : (
                     <div>
+                    <Navbar />
                 <h2>Escribe el nuevo post</h2>
                 <form onSubmit = {this.onSubmit}>
                     <div className = "form-group">

@@ -76,15 +76,6 @@ export default class SigninForm extends Component {
                         <div className = "form-group">
                             <input type = "submit" value = "Entra al mundo" className = "btn btn-primary"/>
                         </div>
-                        <div className = "col-sm-4">
-                            <div className = "card">
-                                <div className = "card-body">
-                                    <a className = "btn btn-block btn social btn google" href="http://localhost:5000/auth/google" role="button">
-                                        Sign In with Google
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
                         <p>{this.state.errorMessage}</p>
                     </form>
                 </div>

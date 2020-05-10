@@ -3,7 +3,7 @@ import axios from "axios";
 import {Editor} from "@tinymce/tinymce-react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-//import qs from "qs";
+import Navbar from "./Navbar.component";
 
 export default class EditPosts extends Component {
     constructor (props){
@@ -84,8 +84,17 @@ export default class EditPosts extends Component {
     }
 
     render(){
+        const authenticated = window.localStorage.getItem("isAuthenticated");
         return(
             <div>
+                {!authenticated ? (
+                    <div>
+                    <h1>¡Alerta de intruso!</h1>
+                    <p>Enviando dirección IP y captura de cámara</p>
+                    </div>
+                ) : (
+                    <div>
+                    <Navbar />
                 <h2>Edita el post</h2>
                 <form onSubmit = {this.onSubmit}>
                     <div className = "form-group">
@@ -155,6 +164,9 @@ export default class EditPosts extends Component {
                     </div>
                 </form>
             </div>
+                )}
+            </div>
+            
         );
     }
 }

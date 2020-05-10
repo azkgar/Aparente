@@ -1,5 +1,6 @@
 import React , {Component} from "react";
 import axios from "axios";
+import Navbar from "./Navbar.component";
 
 
 export default class EditUser extends Component{
@@ -59,8 +60,17 @@ export default class EditUser extends Component{
         });
     }
     render(){
+        const authenticated = window.localStorage.getItem("isAuthenticated");
         return(
             <div>
+                {!authenticated ? (
+                    <div>
+                    <h1>¡Alerta de intruso!</h1>
+                    <p>Enviando dirección IP y captura de cámara</p>
+                    </div>
+                ) : (
+                    <div>
+            <Navbar />
                 <h2>Actualiza escritor</h2>
                 <form onSubmit = {this.onSubmit}>
                     <div className = "form-group">
@@ -85,6 +95,8 @@ export default class EditUser extends Component{
                         <input type = "submit" value = "Editar escritor" className = "btn btn-primary"/>
                     </div>
                 </form>
+            </div>
+                )}
             </div>
         );
     }

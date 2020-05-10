@@ -1,6 +1,5 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import Navbar from "./components/Navbar.component";
 import CreatePosts from "./components/Create-Post.component";
 import CreateUser from "./components/Create-User.component";
 import PostsList from "./components/Posts-List.component";
@@ -13,9 +12,7 @@ import Fail from "./components/Fail.component";
 function App() {
   return (
     <Router> 
-      <div className = "container">
-      <Navbar /> 
-      <br /> 
+      <div>
       <Switch>
       <Route exact path = "/" component = {Home} />
       <Route exact path="/admin/consola" component = {PostsList}/>
