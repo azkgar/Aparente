@@ -52,12 +52,16 @@ router.route("/login")
            return res.json(err.data);
        } else {
             passport.authenticate("local")(req,res,function(){
-                return res.json(user);
-            }); 
+                return res.json({
+                    user,
+                    isAuthenticated: true
+                });
+                
+            });
+            console.log(user);
        }
    });
 });
-
 
 router.route("/logout")
 .get((req,res)=>{
@@ -92,7 +96,10 @@ router.route("/register")
                         message: error || "Oops... something went wrong!"
                     });
                 }
-                return res.json(user);
+                return res.json({
+                    user,
+                    isAuthenticated: true
+                });
             })(req,res,next);
         }
     });

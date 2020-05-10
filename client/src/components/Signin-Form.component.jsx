@@ -40,6 +40,8 @@ export default class SigninForm extends Component {
             data: user
         })
         .then((response)=>{
+            const isAuthenticated = response.data.isAuthenticated;
+            window.localStorage.setItem("isAuthenticated",isAuthenticated);
             this.props.history.push("/admin/consola");
         })
         .catch((error)=>{
