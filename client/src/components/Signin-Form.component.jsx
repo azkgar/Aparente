@@ -11,7 +11,8 @@ export default class SigninForm extends Component {
 
         this.state ={
             username: "",
-            password: ""
+            password: "", 
+            errorMessage:""
         }
     }
 
@@ -42,6 +43,9 @@ export default class SigninForm extends Component {
             this.props.history.push("/admin/consola");
         })
         .catch((error)=>{
+            this.setState({
+                errorMessage: error.response.statusText
+            })
             console.log("Error: ",error.response);
         });
     }
@@ -79,6 +83,7 @@ export default class SigninForm extends Component {
                                 </div>
                             </div>
                         </div>
+                        <p>{this.state.errorMessage}</p>
                     </form>
                 </div>
             );

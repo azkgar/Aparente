@@ -42,14 +42,6 @@ export default class PostsList extends Component {
             .catch((error)=> {
                 console.log(error);
             });
-        axios.get("http://localhost:5000/auth/login/success")
-            .then(response=>{
-                this.setState({auth: response.data})
-                console.log(response);
-            })
-            .catch((error)=>{
-                console.log(error);
-            });
     }
 
     deletePost(id){
