@@ -14,12 +14,14 @@ router.route("/redactar")
     const title = req.body.title;
     const date = Date.parse(req.body.date);
     const content = req.body.content;
+    const categories = req.body.categories;
 
     const newPost = new Post ({
         username,
         title,
         date,
-        content
+        content,
+        categories
     });
 
     newPost.save()
@@ -47,6 +49,7 @@ router.route("/editar/:id")
             post.title = req.body.title;
             post.date = Date.parse(req.body.date);
             post.content = req.body.content;
+            post.categories = req.body.categories
 
             post.save()
                 .then(()=> res.json("Post editado!"))

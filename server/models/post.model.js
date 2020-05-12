@@ -19,6 +19,10 @@ const postSchema = new Schema ({
     content: {
         type: String,
         required: true
+    },
+    categories: {
+        type:String,
+        required: true
     }
 },{
     timestamps: true
