@@ -3,7 +3,7 @@ import {Link} from "react-router-dom"; //nos deja agregar links a las rutas con 
 
 export default class Navbar extends Component { 
     handleClick(e){
-        window.localStorate.clear();
+        window.localStorage.clear();
     }
     render(){ 
         return( 

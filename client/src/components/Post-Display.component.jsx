@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from "react"
+import React from "react"
 import {Link} from "react-router-dom";
 import ReactHtmlParser from "react-html-parser";
 
 const PostDisplay = (props) => {
     const length = props.posts.length;
     const last = length - 1;
-    const titles = props.posts.map((currentPost)=>{
+    const titles = props.posts.map((currentPost)=>{ 
         return currentPost.title
     });
     const dates = props.posts.map((currentPost)=>{
