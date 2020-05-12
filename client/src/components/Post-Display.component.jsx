@@ -20,9 +20,13 @@ const PostDisplay = (props) => {
     const ids = props.posts.map((currentPost)=>{
         return currentPost._id;
     });
+    const categories = props.posts.map((currentPost)=>{
+        return currentPost.categories;
+    });
     return(
         <div>
             <h2>{titles[last]}</h2>
+            <p>{categories[last]}</p>
             <p>{dates[last]}</p>
             <div>{ReactHtmlParser(contents[last])}</div>
             <p>{usernames[last]}</p> 

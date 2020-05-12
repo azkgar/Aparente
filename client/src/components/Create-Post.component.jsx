@@ -13,6 +13,7 @@ export default class CreatePosts extends Component{
         this.onChangeTitle = this.onChangeTitle.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
         this.onChangeContent = this.onChangeContent.bind(this);
+        this.onChangeCategories = this.onChangeCategories.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
@@ -20,6 +21,7 @@ export default class CreatePosts extends Component{
             title: "",
             date: new Date(),
             content: "",
+            categories: "",
             authors: []
         }
     }
@@ -60,6 +62,11 @@ export default class CreatePosts extends Component{
             content: content
         });
     }
+    onChangeCategories(e){
+        this.setState({
+            categories: e.target.value
+        });
+    }
 
     onSubmit(e){
         e.preventDefault();
@@ -67,7 +74,8 @@ export default class CreatePosts extends Component{
             username: this.state.username,
             title: this.state.title,
             date: this.state.date,
-            content: this.state.content
+            content: this.state.content,
+            categories: this.state.categories
         }
 
         axios.post("http://localhost:5000/writescribir/post/redactar", newPost)
@@ -113,6 +121,15 @@ export default class CreatePosts extends Component{
                         className = "form-control"
                         value={this.state.title}
                         onChange = {this.onChangeTitle}
+                        />
+                    </div>
+                    <div className = "form-group">
+                        <label>Categoria: </label>
+                        <input type = "text"
+                        required
+                        className = "form-control"
+                        value={this.state.categories}
+                        onChange = {this.onChangeCategories}
                         />
                     </div>
                     <div className = "form-group">

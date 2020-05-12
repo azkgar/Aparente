@@ -13,6 +13,7 @@ export default class EditPosts extends Component {
         this.onChangeTitle = this.onChangeTitle.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
         this.onChangeContent = this.onChangeContent.bind(this);
+        this.onChangeCategories = this.onChangeCategories.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
@@ -20,6 +21,7 @@ export default class EditPosts extends Component {
             title: "",
             date: new Date(),
             content: "",
+            categories: "",
             authors: []
         }
     }
@@ -31,7 +33,8 @@ export default class EditPosts extends Component {
                     username: response.data.username,
                     title: response.data.title,
                     date: new Date(response.data.date),
-                    content: response.data.content
+                    content: response.data.content,
+                    categories: response.data.categories
                 });
             })
             .catch(function(error){
@@ -67,13 +70,19 @@ export default class EditPosts extends Component {
             content: content
         });
     }
+    onChangeCategories (e){
+        this.setState({
+            categories: e.target.value
+        });
+    }
     onSubmit(e){
         e.preventDefault();
         const editedPost = {
             username: this.state.username,
             title: this.state.title,
             date: this.state.date,
-            content: this.state.content
+            content: this.state.content,
+            categories: this.state.categories
         }
         console.log(editedPost);
 
@@ -120,6 +129,15 @@ export default class EditPosts extends Component {
                         className = "form-control"
                         value={this.state.title}
                         onChange = {this.onChangeTitle}
+                        />
+                    </div>
+                    <div className = "form-group">
+                        <label>Categorias: </label>
+                        <input type = "text"
+                        required
+                        className = "form-control"
+                        value={this.state.categories}
+                        onChange = {this.onChangeCategories}
                         />
                     </div>
                     <div className = "form-group">

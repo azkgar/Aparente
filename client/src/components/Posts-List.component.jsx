@@ -10,6 +10,7 @@ const Post = props => (
     <div>
         <div>
         <h4>{props.post.title}</h4>
+        <p>{props.post.categories}</p>
         <p>{props.post.date.substring(0,10)}</p>
         <div>{ReactHtmlParser(props.post.content)}</div>
         <p>{props.post.content.substring(0,30) + "..." }</p>
@@ -51,7 +52,7 @@ export default class PostsList extends Component {
 
     deletePost(id){
         axios.delete("http://localhost:5000/writescribir/post/"+id)
-            .then(res=>console.log(res.data));
+            .then(res=>{console.log(res.data); alert("Post eliminado.");});
         this.setState({
             posts: this.state.posts.filter (el => el._id !== id)
         });
