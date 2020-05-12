@@ -1,8 +1,9 @@
-import React, {Component} from "react";
+import React, {Component, useState} from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
 import ReactHtmlParser from "react-html-parser";
 import Navbar from "./Navbar.component";
+import PostDisplay from "./Post-Display.component"
 
 const Post = props => (
 
@@ -26,13 +27,16 @@ const Post = props => (
 )
 
 export default class PostsList extends Component {
-
+    
     constructor(props){
         super(props);
         this.deletePost = this.deletePost.bind(this);
-        this.state = {posts:[], auth:[]};
+        this.lastPost = this.lastPost.bind(this);
+        this.state = {
+            posts: [],
+        }
+        
     }
-
 
     componentDidMount(){
 
@@ -60,15 +64,20 @@ export default class PostsList extends Component {
         });
     }
 
+    
+
+    lastPost=()=>{
+        const posts = this.state.posts
+        return <PostDisplay posts = {posts} deletePost ={this.deletePost}/>  
+    }
+
     handleClick(e){
         window.localStorage.clear();
-        
-
     }
 
     render(){
         const authenticated = window.localStorage.getItem("isAuthenticated");
-        
+
         return(
             <div>
                 {!authenticated ? (
@@ -80,7 +89,10 @@ export default class PostsList extends Component {
                 <div>
                 <Navbar />
                 <h1>Bienvenido a la consola de admin.</h1>
-                {this.postsList()}
+                <h2>El último post es: </h2>
+                {this.lastPost(this.state.posts)}
+                <h2>Lista de todos los posts</h2>
+                {this.postsList(this.state.posts)}
                 </div>
                 )}
                 
